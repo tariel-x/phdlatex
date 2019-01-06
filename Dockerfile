@@ -39,6 +39,7 @@ RUN apt-get install -y -q asymptote \
     texlive-lang-cyrillic \
     texlive-lang-english \
     texlive-lang-european \
+    texlive-lang-french \
     texlive-latex-base \
     texlive-latex-extra \
     texlive-latex-recommended \
@@ -55,4 +56,5 @@ RUN apt-get install -y -q asymptote \
     vprerex \
     xindy \
     texlive-generic-extra \
-    make
+    make \
+    fonts-liberation
