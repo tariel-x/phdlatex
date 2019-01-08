@@ -57,4 +57,5 @@ RUN apt-get install -y -q asymptote \
     xindy \
     texlive-generic-extra \
     make \
-    fonts-liberation
+    fonts-liberation \
+    poppler-utils
