@@ -52,6 +52,7 @@ RUN apt-get install -y -q asymptote \
     texlive-publishers \
     texlive-science \
     texlive-xetex \
+    scalable-cyrfonts-tex \
     tipa \
     vprerex \
     xindy \
@@ -59,3 +60,11 @@ RUN apt-get install -y -q asymptote \
     make \
     fonts-liberation \
     poppler-utils
+
+WORKDIR /root
+COPY pscyr-install.sh PSCyr-0.4-beta9-tex.tar.gz PSCyr-0.4-beta9-type1.tar.gz /root/
+RUN chmod 775 pscyr-install.sh 
+RUN mkdir -p /root/texmf
+#ENV DEST_DIR=`kpsewhich -expand-var='$TEXMFHOME'`
+ENV DEST_DIR=/root/texmf
+RUN bash /root/pscyr-install.sh
