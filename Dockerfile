@@ -52,7 +52,6 @@ RUN apt-get install -y -q asymptote \
     texlive-publishers \
     texlive-science \
     texlive-xetex \
-    scalable-cyrfonts-tex \
     tipa \
     vprerex \
     xindy \
