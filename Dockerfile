@@ -30,22 +30,16 @@ RUN apt-get install -y -q asymptote \
     texlive-binaries \
     texlive-extra-utils \
     texlive-font-utils \
-    texlive-fonts-extra \
-    texlive-fonts-extra-links \
     texlive-fonts-recommended \
     texlive-formats-extra \
-    texlive-games \
     texlive-humanities \
     texlive-lang-cyrillic \
     texlive-lang-english \
-    texlive-lang-european \
-    texlive-lang-french \
     texlive-latex-base \
     texlive-latex-extra \
     texlive-latex-recommended \
     texlive-luatex \
     texlive-metapost \
-    texlive-music \
     texlive-pictures \
     texlive-plain-generic \
     texlive-pstricks \
@@ -58,12 +52,28 @@ RUN apt-get install -y -q asymptote \
     texlive-generic-extra \
     make \
     fonts-liberation \
-    poppler-utils
+    poppler-utils 
+
+# For fonts:
+RUN DEBIAN_FRONTEND=noninteractive apt install -y wget cabextract xfonts-utils 
 
 WORKDIR /root
+
+# TTF Fonts
+COPY scalable-cyrfonts-tex-shurph_4.16_all-from-yd.deb ttf-mscorefonts-installer_3.7_all-from-debian.deb /root/
+RUN dpkg -i scalable-cyrfonts-tex-shurph_4.16_all-from-yd.deb ttf-mscorefonts-installer_3.7_all-from-debian.deb
+
+RUN DEBIAN_FRONTEND=noninteractive apt install -y texlive-lang-french
+
+# PSCyr
 COPY pscyr-install.sh PSCyr-0.4-beta9-tex.tar.gz PSCyr-0.4-beta9-type1.tar.gz /root/
 RUN chmod 775 pscyr-install.sh 
 RUN mkdir -p /root/texmf
 #ENV DEST_DIR=`kpsewhich -expand-var='$TEXMFHOME'`
 ENV DEST_DIR=/root/texmf
 RUN bash /root/pscyr-install.sh
+
+RUN DEBIAN_FRONTEND=noninteractive  apt install -y make
+
+RUN mkdir /root/latexsource
+WORKDIR /root/latexsource
